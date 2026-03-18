@@ -1,5 +1,6 @@
 import Header from "./components/homepage/Header";
 import Hero from "./components/homepage/Hero";
+import VisionMission from "./components/homepage/VisionMission";
 import WeareSOL from "./components/homepage/WeareSOL";
 import DidYouKnow from "./components/homepage/DidYouKnow";
 
@@ -10,6 +11,7 @@ export default function Home() {
       <Hero />
       <DidYouKnow />
       <WeareSOL />
+      <VisionMission />
     </main>
   );
 }
