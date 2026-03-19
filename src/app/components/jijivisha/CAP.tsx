@@ -1,0 +1,105 @@
+"use client";
+
+import Image from "next/image";
+
+export default function CAP() {
+  return (
+    <section className="bg-[#FAF7F2] py-12 md:py-24 px-6 md:px-12 lg:px-24 overflow-hidden">
+      <div className="max-w-7xl mx-auto relative">
+        <div className="flex flex-col lg:flex-row items-stretch">
+          
+          {/* Peach Box - Community Art Projects (CAPs) */}
+          <div className="w-full lg:w-[45%] bg-[#F9C784] p-8 md:p-12 lg:p-16 relative z-10 flex flex-col justify-center">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#1A1A1A] leading-tight mb-4">
+              Community Art Projects (CAPs)
+            </h2>
+            <p className="text-lg md:text-xl font-bold text-[#1A1A1A] mb-8">
+              Showcase platform for<br />The Jijivisha Fellowship
+            </p>
+            
+            <div className="space-y-6 text-[#1A1A1A] text-lg leading-relaxed">
+              <p>
+                Through Community Art Projects (CAPs), students apply their skills to local realities.
+              </p>
+              <p>
+                Documenting family stories, creating films about social issues, designing collaborative murals, publishing books, or building theatre performances.
+              </p>
+              <p>
+                In the process, children become leaders, parents become collaborators, and communities begin to see young people as active co-creators and not passive consumers.
+              </p>
+            </div>
+
+            {/* Pretzel Image */}
+            <div className="absolute -bottom-12 -left-12 w-48 h-48 pointer-events-none hidden lg:block">
+              <Image
+                src="/jijivisha/pretzel.png"
+                alt="Decorative pretzel"
+                fill
+                className="object-contain"
+              />
+            </div>
+          </div>
+
+          {/* Teal Box - Impact */}
+          <div className="w-full lg:w-[55%] bg-[#4E9F8F] p-8 md:p-12 lg:p-16 relative lg:mt-12 lg:ml-[-2rem] z-20 flex flex-col">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-12">
+              Impact
+            </h2>
+
+            {/* Stats Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-10 gap-x-8 mb-16">
+              <div className="text-white">
+                <span className="text-4xl md:text-5xl font-bold block mb-2">332+</span>
+                <p className="text-sm md:text-base opacity-90 leading-snug">
+                  Hours development training for fellows.
+                </p>
+              </div>
+              <div className="text-white">
+                <span className="text-4xl md:text-5xl font-bold block mb-2">36.6%</span>
+                <p className="text-sm md:text-base opacity-90 leading-snug">
+                  Growth in curiosity skills (over 25% gain)
+                </p>
+              </div>
+              <div className="text-white">
+                <span className="text-4xl md:text-5xl font-bold block mb-2">32.5%</span>
+                <p className="text-sm md:text-base opacity-90 leading-snug">
+                  Improvement in emotional awareness
+                </p>
+              </div>
+              <div className="text-white">
+                <span className="text-4xl md:text-5xl font-bold block mb-2">35.5%</span>
+                <p className="text-sm md:text-base opacity-90 leading-snug">
+                  Improvement in imagination
+                </p>
+              </div>
+            </div>
+
+            {/* Testimonial */}
+            <div className="text-white border-t border-white/20 pt-8 mt-auto">
+              <p className="text-base md:text-lg italic leading-relaxed mb-6">
+                “Since 2022, Slam Out Loud's impact at Ashoka Shishu Vihara has been transformative. Their creative classroom sessions, house visits and emotional parent workshops has built unprecedented bonds within our community.
+              </p>
+              <p className="text-base md:text-lg italic leading-relaxed mb-6">
+                The fellows bring incredible energy, and our teachers have shown remarkable growth in confidence. SOL has brought a renewed sense of possibility to our school, and we are deeply grateful for this partnership.”
+              </p>
+              <p className="font-bold text-lg">
+                Sudhir Kiran, Educational Leader
+              </p>
+            </div>
+
+            {/* Star Image */}
+            <div className="absolute -top-16 -right-16 md:-top-24 md:-right-24 w-64 h-64 md:w-80 md:h-80 pointer-events-none hidden lg:block">
+              <Image
+                src="/jijivisha/star.png"
+                alt="Decorative star character"
+                fill
+                className="object-contain"
+              />
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  );
+}
