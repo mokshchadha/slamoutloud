@@ -13,6 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 import { Patrick_Hand } from "next/font/google";
+import Header from "./components/Header";
 
 const patrickHand = Patrick_Hand({
   weight: "400",
@@ -35,6 +36,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${patrickHand.variable} antialiased`}
       >
+        <Header />
         {children}
       </body>
     </html>
