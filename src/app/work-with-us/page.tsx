@@ -1,16 +1,14 @@
 import Footer from "../components/Footer";
-import Newsletter from "../components/homepage/Newsletter";
+import Hero from "../components/work-with-us/Hero";
+import Collaboration from "../components/work-with-us/Collaboration";
+import Learning from "../components/work-with-us/Learning";
 
 export default function WorkWithUs() {
   return (
-    <main className="min-h-screen pt-20">
-      <section className="py-16 px-6 md:px-12 max-w-7xl mx-auto">
-        <h1 className="text-4xl md:text-6xl font-bold mb-8 text-[#fb747b]">Work with us</h1>
-        <div className="prose prose-lg text-gray-700">
-
-        </div>
-      </section>
-      <Newsletter />
+    <main className="min-h-screen pt-5 bg-[#fffcf5]">
+      <Hero />
+      <Collaboration />
+      <Learning/>
       <Footer />
     </main>
   );

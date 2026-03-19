@@ -1,6 +1,6 @@
 import Footer from "../components/Footer";
 
-export default function JijivishaPage() {
+export default function AFAPage() {
   return (
     <main className="min-h-screen pt-20">
       <section className="py-16 px-6 md:px-12 max-w-7xl mx-auto">
@@ -16,6 +16,7 @@ export default function JijivishaPage() {
           </ul>
         </div>
       </section>
+ 
       <Footer />
     </main>
   );
