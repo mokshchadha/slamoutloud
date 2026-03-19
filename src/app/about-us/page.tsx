@@ -1,11 +1,12 @@
+import Hero from "../components/about/Hero";
 import Footer from "../components/Footer";
 import Newsletter from "../components/homepage/Newsletter";
 
 export default function AboutUs() {
   return (
-    <main className="min-h-screen pt-20">
+    <main >
+      <Hero />
       <section className="py-16 px-6 md:px-12 max-w-7xl mx-auto">
-        <h1 className="text-4xl md:text-6xl font-bold mb-8 text-[#fb747b]">About us</h1>
         <div className="prose prose-lg text-gray-700">
           <p className="mb-6">
             Slam Out Loud (SOL) is an award-winning for-profit social enterprise that uses the power of performance and creative arts to build 21st-century skills like creativity, critical thinking, communication, and collaboration in children from underserved communities.
