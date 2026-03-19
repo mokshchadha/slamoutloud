@@ -7,6 +7,7 @@ import OurImpact from "./components/homepage/OurImpact";
 import ChildrensHighlight from "./components/homepage/ChildrensHighlight";
 import Programmes from "./components/homepage/Programmes";
 import FAQs from "./components/homepage/FAQs";
+import DonateAndJoin from "./components/homepage/DonateAndJoin";
 
 export default function Home() {
   return (
@@ -15,11 +16,12 @@ export default function Home() {
       <Hero />
       <DidYouKnow />
       <WeareSOL />
+      <FAQs />
       <VisionMission />
       <OurImpact />
-      <Programmes />
       <ChildrensHighlight />
-      <FAQs />
+      <Programmes />
+      <DonateAndJoin />
     </main>
   );
 }
