@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 export default function Programmes() {
   return (
-    <section className="w-full bg-[#fdfaf4] py-16 md:py-32 px-6 md:px-12 flex justify-center font-sans overflow-hidden">
+    <section id="programmes" className="w-full bg-[#fdfaf4] py-16 md:py-32 px-6 md:px-12 flex justify-center font-sans overflow-hidden">
       <div className="max-w-[1400px] w-full flex flex-col lg:flex-row gap-8 lg:gap-16 pl-0 md:pl-8">
         
         {/* Title Section */}

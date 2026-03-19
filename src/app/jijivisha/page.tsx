@@ -1,7 +1,7 @@
 import Footer from "../components/Footer";
 import Newsletter from "../components/homepage/Newsletter";
 
-export default function ProgrammesPage() {
+export default function JijivishaPage() {
   return (
     <main className="min-h-screen pt-20">
       <section className="py-16 px-6 md:px-12 max-w-7xl mx-auto">
