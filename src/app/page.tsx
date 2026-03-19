@@ -10,6 +10,7 @@ import FAQs from "./components/homepage/FAQs";
 import DonateAndJoin from "./components/homepage/DonateAndJoin";
 import PartnersAndFeature from "./components/homepage/PartnersAndFeature";
 import Media from "./components/homepage/Media";
+import Newsletter from "./components/homepage/Newsletter";
 import Footer from "./components/Footer";
 
 export default function Home() {
@@ -27,6 +28,7 @@ export default function Home() {
       <PartnersAndFeature />
       <DonateAndJoin />
       <Media />
+      <Newsletter />
       <Footer />
     </main>
   );
