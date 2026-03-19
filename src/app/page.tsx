@@ -3,6 +3,7 @@ import Hero from "./components/homepage/Hero";
 import VisionMission from "./components/homepage/VisionMission";
 import WeareSOL from "./components/homepage/WeareSOL";
 import DidYouKnow from "./components/homepage/DidYouKnow";
+import OurImpact from "./components/homepage/OurImpact";
 import FAQs from "./components/homepage/FAQs";
 
 export default function Home() {
@@ -13,6 +14,7 @@ export default function Home() {
       <DidYouKnow />
       <WeareSOL />
       <VisionMission />
+      <OurImpact />
       <FAQs />
     </main>
   );
