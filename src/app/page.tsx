@@ -8,6 +8,7 @@ import ChildrensHighlight from "./components/homepage/ChildrensHighlight";
 import Programmes from "./components/homepage/Programmes";
 import FAQs from "./components/homepage/FAQs";
 import DonateAndJoin from "./components/homepage/DonateAndJoin";
+import PartnersAndFeature from "./components/homepage/PartnersAndFeature";
 
 export default function Home() {
   return (
@@ -21,6 +22,7 @@ export default function Home() {
       <OurImpact />
       <ChildrensHighlight />
       <Programmes />
+      <PartnersAndFeature />
       <DonateAndJoin />
     </main>
   );
