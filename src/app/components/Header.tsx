@@ -53,7 +53,8 @@ export default function Header() {
 
           {/* Action Button */}
           <Link
-            href="/donate"
+            href="https://milaap.org/fundraisers/slam-out-loud"
+            target="_blank"
             className="bg-white text-black px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors shadow-sm font-medium"
           >
             Donate
