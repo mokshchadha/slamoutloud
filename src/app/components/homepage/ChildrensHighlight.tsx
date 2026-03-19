@@ -25,8 +25,8 @@ const highlights = [
 
 export default function ChildrensHighlight() {
   return (
-    <section className="w-full py-16 md:py-24 px-6 md:px-12 flex justify-center overflow-hidden">
-      <div className=" w-full bg-[#FF807B] px-6 py-12 md:px-16 md:py-20 flex flex-col gap-12 md:gap-16">
+    <section className="w-full bg-[#FF807B] py-16 md:py-24 px-6 md:px-12 flex justify-center overflow-hidden">
+      <div className="w-full max-w-7xl flex flex-col gap-12 md:gap-16">
         
         {/* Header Section */}
         <div className="text-center flex flex-col items-center gap-2">
