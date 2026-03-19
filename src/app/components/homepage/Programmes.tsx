@@ -35,7 +35,7 @@ export default function Programmes() {
                 Through state partnerships in Punjab, Maharashtra, and Bihar, AFA brings SEL into government schools through contextual curriculum rooted in local culture and expressions shaped by everyday realities.
               </p>
               <div className="mt-auto">
-                <a href="#" className="inline-flex items-center text-[15px] font-medium hover:underline transition-all">
+                <a href="/afa" className="inline-flex items-center text-[15px] font-medium hover:underline transition-all">
                   Know More <span className="ml-2 text-lg">⟶</span>
                 </a>
               </div>
@@ -62,7 +62,7 @@ export default function Programmes() {
                 We place trained fellows inside classrooms and community spaces where art periods are intentionally designed to build core social-emotional learning skills, currently across Delhi, Bengaluru, Mumbai, and Pune.
               </p>
               <div className="mt-auto">
-                <a href="#" className="inline-flex items-center text-[15px] font-medium hover:underline transition-all">
+                <a href="/jijivisha" className="inline-flex items-center text-[15px] font-medium hover:underline transition-all">
                   Know More <span className="ml-2 text-lg">⟶</span>
                 </a>
               </div>
