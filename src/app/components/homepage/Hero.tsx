@@ -1,5 +1,5 @@
 
-import Image from 'next/image';
+import SkullAnimation from './SkullAnimation';
 
 export default function Hero() {
   return (
@@ -9,14 +9,8 @@ export default function Hero() {
       <div className="relative w-full max-w-4xl mx-auto flex flex-col items-center">
         
         {/* Central Image Container */}
-        <div className="relative w-[300px] h-[300px] md:w-[400px] md:h-[400px]">
-           <Image 
-             src="/skull.png" 
-             alt="Head outline with skills" 
-             fill
-             className="object-contain"
-             priority
-           />
+        <div className="relative w-[350px] h-[350px] md:w-[500px] md:h-[500px]">
+           <SkullAnimation />
         </div>
 
         {/* Bottom Text */}
