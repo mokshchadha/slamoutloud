@@ -125,8 +125,8 @@ export default function Hero() {
           <div
             className="text-center mb-2 transition-all duration-700 ease-out"
             style={{
-              opacity: phase1In ? 1 : 0,
-              transform: phase1In ? 'translateY(0)' : 'translateY(-20px)',
+              opacity: phase1In && phase < 2 ? 1 : 0,
+              transform: phase1In && phase < 2 ? 'translateY(0)' : 'translateY(-20px)',
               pointerEvents: 'none',
               minHeight: '2.5rem',
             }}
