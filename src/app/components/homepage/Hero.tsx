@@ -40,6 +40,14 @@ export default function Hero() {
     }
   }, []);
 
+  const handleSkip = () => {
+    sessionStorage.setItem('skullAnimDone', 'true');
+    setIsFirstLoad(false);
+    setScrollProgress(1);
+    setIsAnimationComplete(true);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   useEffect(() => {
     window.dispatchEvent(new CustomEvent('skullAnimationComplete', { detail: isAnimationComplete }));
   }, [isAnimationComplete]);
@@ -51,6 +59,32 @@ export default function Hero() {
     >
       <div className={`w-full flex flex-col items-center justify-center p-8 overflow-hidden ${isFirstLoad ? 'sticky top-0 h-screen' : 'min-h-[calc(100vh-80px)] relative'}`}>
         
+        {/* Scroll Prompt Overlay */}
+        {isFirstLoad && !isAnimationComplete && (
+          <div 
+            className="absolute inset-0 flex flex-col items-center justify-center z-20 pointer-events-none transition-opacity duration-500"
+            style={{ opacity: scrollProgress < 0.05 ? 1 : 0 }}
+          >
+            <div className="flex flex-col items-center mb-8">
+              <div className="mb-4">
+                <svg width="30" height="45" viewBox="0 0 24 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="2" y="2" width="20" height="32" rx="10" stroke="black" strokeWidth="2"/>
+                  <rect x="11" y="8" width="2" height="6" rx="1" fill="black"/>
+                  <path d="M8 22L12 26L16 22" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M8 26L12 30L16 26" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+              <h2 className="text-2xl md:text-3xl font-bold text-black mb-2 italic">Scroll to connect the dots</h2>
+              <button 
+                onClick={handleSkip}
+                className="pointer-events-auto text-sm text-gray-500 hover:text-black transition-colors italic underline underline-offset-4"
+              >
+                Skip the experience
+              </button>
+            </div>
+          </div>
+        )}
+
         {/* Main Container */}
         <div className="relative w-full max-w-4xl mx-auto flex flex-col items-center">
           

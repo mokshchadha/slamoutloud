@@ -42,7 +42,7 @@ export default function Header() {
       isVisible ? 'translate-y-0' : '-translate-y-full'
     }`}>
       {/* Logo Area */}
-      <div className="bg-[#fb747b] flex justify-between items-center w-full py-1 px-2 md:px-12 rounded-lg">
+      <div className="bg-[#fb747b] flex justify-between items-center w-full py-1 px-2 md:px-12 rounded-2xl md:rounded-3xl">
         <div className="flex items-center mb-4 md:mb-0">
           <Link href="/">
             <Image
@@ -68,7 +68,7 @@ export default function Header() {
                     : "hover:text-red-100"
                 } ${
                   link.name === "Work with us"
-                    ? "border border-white/50 px-4 py-2 rounded-lg hover:bg-white/10"
+                    ? "border border-white/50 px-4 py-2 rounded-xl hover:bg-white/10"
                     : ""
                 }`}
               >
@@ -81,7 +81,7 @@ export default function Header() {
           <Link
             href="https://milaap.org/fundraisers/slam-out-loud"
             target="_blank"
-            className="bg-white text-black px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors shadow-sm font-medium"
+            className="bg-white text-black px-4 py-2 rounded-xl hover:bg-gray-100 transition-colors shadow-sm font-medium"
           >
             Donate
           </Link>
