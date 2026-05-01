@@ -5,34 +5,38 @@ import { useState, useEffect, useRef, useCallback } from "react";
 /*
   The SVG path REVERSED so it starts from bottom-left (Arithmetic side)
   and draws rightward: up the face → over the crown → down the back of head → neck.
-  Original path went bottom-right → top → bottom-left; this is the reverse.
 */
 const HEAD_PATH =
   "M133.427 286.326C133.427 245.83 115.743 241.516 93.7422 242.073C43.6142 236.645 37.766 216.189 26.4872 170.684C24.5159 162.73 23.563 170.684 3.51185 160.247C-1.50098 149.392 26.3133 132.663 33.1709 93.0321C42.7787 37.5072 87.4762 -5.49326 158.491 4.94376C229.505 15.3808 257.911 57.9638 257.911 122.256C257.911 165.571 229.463 188.986 222.404 209.092C208.04 250.005 220.733 293.005 228.252 311.374";
 
 /*
-  Labeled dots – fractions are now along the REVERSED path.
-  Path starts bottom-left → up face → crown → down back → bottom-right.
+  Labeled dots – fractions are along the REVERSED path.
+  Left side = academic skills (Arithmetic, Writing, Reading)
+  Right side = essential/soft skills (Curiosity, Imagination, Emotional Awareness, Agency)
 */
 const LABELS = [
-  { fraction: 0.09, label: "Arithmetic", side: "left", offsetX: -16, offsetY: 22, color: "#9a9a9a" },
-  { fraction: 0.27, label: "Writing", side: "left", offsetX: -16, offsetY: 6, color: "#9a9a9a" },
-  { fraction: 0.50, label: "Reading", side: "left", offsetX: -16, offsetY: -14, color: "#9a9a9a" },
-  { fraction: 0.61, label: "Curiosity", side: "right", offsetX: 16, offsetY: -16, color: "#4a9a8a" },
-  { fraction: 0.75, label: "Imagination", side: "right", offsetX: 16, offsetY: 8, color: "#4a9a8a" },
-  { fraction: 0.86, label: "Emotional Awareness", side: "right", offsetX: 16, offsetY: 8, color: "#4a9a8a" },
-  { fraction: 0.97, label: "Agency", side: "right", offsetX: 16, offsetY: 22, color: "#4a9a8a" },
+  { fraction: 0.09, label: "Arithmetic",         side: "left",  offsetX: -16, offsetY:  22, color: "#9a9a9a", group: "left"  },
+  { fraction: 0.27, label: "Writing",             side: "left",  offsetX: -16, offsetY:   6, color: "#9a9a9a", group: "left"  },
+  { fraction: 0.50, label: "Reading",             side: "left",  offsetX: -16, offsetY: -14, color: "#9a9a9a", group: "left"  },
+  { fraction: 0.61, label: "Curiosity",           side: "right", offsetX:  16, offsetY: -16, color: "#4a9a8a", group: "right" },
+  { fraction: 0.75, label: "Imagination",         side: "right", offsetX:  16, offsetY:   8, color: "#4a9a8a", group: "right" },
+  { fraction: 0.86, label: "Emotional Awareness", side: "right", offsetX:  16, offsetY:   8, color: "#4a9a8a", group: "right" },
+  { fraction: 0.97, label: "Agency",              side: "right", offsetX:  16, offsetY:  22, color: "#4a9a8a", group: "right" },
 ];
 
 const ANIM_DURATION = 4000;
 
+type HighlightMode = "all" | "left" | "right";
+
 export default function SkullAnimation({
   isFirstLoad = false,
   scrollProgress = 0,
-  onAnimationComplete
+  highlightMode = "all",
+  onAnimationComplete,
 }: {
   isFirstLoad?: boolean;
   scrollProgress?: number;
+  highlightMode?: HighlightMode;
   onAnimationComplete?: () => void;
 }) {
   const pathRef = useRef<SVGPathElement>(null);
@@ -100,27 +104,56 @@ export default function SkullAnimation({
   let translateY = 0;
 
   if (isFirstLoad && pathRef.current && pathLength > 0) {
-    const safeProgress = Math.min(0.999, activeProgress); // avoid exceeding length
+    const safeProgress = Math.min(0.999, activeProgress);
     const pt = pathRef.current.getPointAtLength(pathLength * safeProgress);
-    
+
     if (activeProgress <= 0.8) {
       currentScale = INITIAL_SCALE;
       translateX = VIEWBOX_CX - pt.x * currentScale;
       translateY = VIEWBOX_CY - pt.y * currentScale;
     } else {
       const zoomProgress = (activeProgress - 0.8) / 0.2;
-      // ease zoom out for smoother ending
       const easedZoom = Math.sin((zoomProgress * Math.PI) / 2);
-
       currentScale = INITIAL_SCALE + (1 - INITIAL_SCALE) * easedZoom;
-      
       const targetX = VIEWBOX_CX - pt.x * currentScale;
       const targetY = VIEWBOX_CY - pt.y * currentScale;
-      
       translateX = targetX + (0 - targetX) * easedZoom;
       translateY = targetY + (0 - targetY) * easedZoom;
     }
   }
+
+  // Resolve label colour & opacity given the current highlightMode
+  const getLabelStyle = (d: (typeof dotPositions)[0]) => {
+    if (highlightMode === "all") {
+      return { color: d.color, opacity: activeProgress >= d.fraction ? 1 : 0 };
+    }
+    if (highlightMode === "left") {
+      const lit = d.group === "left";
+      return {
+        color: lit ? d.color : "#c8c8c8",
+        opacity: activeProgress >= d.fraction ? 1 : 0,
+      };
+    }
+    // highlightMode === "right"
+    const lit = d.group === "right";
+    return {
+      color: lit ? d.color : "#c8c8c8",
+      opacity: activeProgress >= d.fraction ? 1 : 0,
+    };
+  };
+
+  const getDotOpacity = (d: (typeof dotPositions)[0]) => {
+    const baseOpacity = activeProgress >= d.fraction ? 1 : 0.3;
+    if (highlightMode === "all") return baseOpacity;
+    const lit = highlightMode === "left" ? d.group === "left" : d.group === "right";
+    return lit ? baseOpacity : 0.25;
+  };
+
+  const getDotColor = (d: (typeof dotPositions)[0]) => {
+    if (highlightMode === "all") return "#e8a849";
+    const lit = highlightMode === "left" ? d.group === "left" : d.group === "right";
+    return lit ? "#e8a849" : "#d0d0d0";
+  };
 
   return (
     <div className="relative w-full h-full flex items-center justify-center pointer-events-none">
@@ -141,7 +174,7 @@ export default function SkullAnimation({
           </filter>
         </defs>
 
-        <g 
+        <g
           style={{
             transform: `translate(${translateX}px, ${translateY}px) scale(${currentScale})`,
             transformOrigin: "0 0",
@@ -154,17 +187,17 @@ export default function SkullAnimation({
               cx={d.x}
               cy={d.y}
               r={4.5}
-              fill="#e8a849"
-              stroke="#d4913a"
+              fill={getDotColor(d)}
+              stroke={getDotColor(d) === "#e8a849" ? "#d4913a" : "#b0b0b0"}
               strokeWidth={0.6}
               style={{
-                opacity: activeProgress >= d.fraction ? 1 : 0.3,
-                transition: "opacity 0.3s ease",
+                opacity: getDotOpacity(d),
+                transition: "opacity 0.5s ease, fill 0.5s ease",
               }}
             />
           ))}
 
-          {/* Main stroke – thick hand-drawn line */}
+          {/* Main stroke */}
           <path
             ref={pathRef}
             d={HEAD_PATH}
@@ -180,8 +213,9 @@ export default function SkullAnimation({
             }}
           />
 
-          {/* Labels – fade in when pencil reaches each dot */}
+          {/* Labels */}
           {dotPositions.map((d, i) => {
+            const { color, opacity } = getLabelStyle(d);
             const revealed = activeProgress >= d.fraction;
             const anchor = d.side === "right" ? "start" : "end";
             return (
@@ -190,14 +224,14 @@ export default function SkullAnimation({
                 x={d.x + d.offsetX}
                 y={d.y + d.offsetY}
                 textAnchor={anchor}
-                fill={d.color}
+                fill={color}
                 fontSize={18}
                 fontFamily="'Caveat', cursive"
                 fontWeight={600}
                 style={{
-                  opacity: revealed ? 1 : 0,
+                  opacity: revealed ? opacity : 0,
                   transform: revealed ? "translateY(0)" : "translateY(5px)",
-                  transition: "opacity 0.5s ease, transform 0.5s ease",
+                  transition: "opacity 0.5s ease, transform 0.5s ease, fill 0.5s ease",
                 }}
               >
                 {d.label}

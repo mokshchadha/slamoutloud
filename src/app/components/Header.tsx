@@ -7,27 +7,7 @@ import { useEffect, useState } from "react";
 
 export default function Header() {
   const pathname = usePathname();
-  const [isVisible, setIsVisible] = useState(pathname !== '/');
-
-  useEffect(() => {
-    if (pathname === '/') {
-      const hasPlayed = sessionStorage.getItem('skullAnimDone');
-      if (hasPlayed) {
-        setIsVisible(true);
-      }
-    } else {
-      setIsVisible(true);
-    }
-
-    const handleAnimComplete = (e: any) => {
-      if (pathname === '/') {
-        setIsVisible(e.detail);
-      }
-    };
-
-    window.addEventListener('skullAnimationComplete', handleAnimComplete);
-    return () => window.removeEventListener('skullAnimationComplete', handleAnimComplete);
-  }, [pathname]);
+  const [isVisible] = useState(true);
 
   const navLinks = [
     { name: "About us", href: "/about-us" },
@@ -38,9 +18,7 @@ export default function Header() {
   const isHome = pathname === '/';
 
   return (
-    <header className={`${isHome ? 'fixed w-full top-0' : 'sticky top-0'} z-50 py-4 px-6 md:px-12 flex flex-col md:flex-row items-center justify-between text-white bg-[#fffcf5] transition-transform duration-1000 ease-out ${
-      isVisible ? 'translate-y-0' : '-translate-y-full'
-    }`}>
+    <header className={`${isHome ? 'fixed w-full top-0' : 'sticky top-0'} z-50 py-4 px-6 md:px-12 flex flex-col md:flex-row items-center justify-between text-white bg-[#fffcf5] translate-y-0`}>
       {/* Logo Area */}
       <div className="bg-[#fb747b] flex justify-between items-center w-full py-1 px-2 md:px-12 rounded-2xl md:rounded-3xl">
         <div className="flex items-center mb-4 md:mb-0">
