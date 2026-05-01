@@ -26,10 +26,18 @@ const LABELS = [
 
 const ANIM_DURATION = 4000;
 
-export default function SkullAnimation() {
+export default function SkullAnimation({
+  isFirstLoad = false,
+  scrollProgress = 0,
+  onAnimationComplete
+}: {
+  isFirstLoad?: boolean;
+  scrollProgress?: number;
+  onAnimationComplete?: () => void;
+}) {
   const pathRef = useRef<SVGPathElement>(null);
   const [pathLength, setPathLength] = useState(0);
-  const [progress, setProgress] = useState(0);
+  const [timeProgress, setTimeProgress] = useState(0);
   const [dotPositions, setDotPositions] = useState<any[]>([]);
   const [isDrawing, setIsDrawing] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
@@ -47,16 +55,9 @@ export default function SkullAnimation() {
     setDotPositions(positions);
   }, []);
 
-  useEffect(() => {
-    if (pathLength > 0 && !hasStarted) {
-      const t = setTimeout(() => startAnimation(), 400);
-      return () => clearTimeout(t);
-    }
-  }, [pathLength, hasStarted]);
-
   const startAnimation = useCallback(() => {
     if (pathLength === 0) return;
-    setProgress(0);
+    setTimeProgress(0);
     setIsDrawing(true);
     setHasStarted(true);
     startTimeRef.current = performance.now();
@@ -66,17 +67,60 @@ export default function SkullAnimation() {
       const elapsed = now - startTimeRef.current;
       const t = Math.min(elapsed / ANIM_DURATION, 1);
       const eased = t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
-      setProgress(eased);
+      setTimeProgress(eased);
       if (t < 1) {
         animRef.current = requestAnimationFrame(tick);
       } else {
         setIsDrawing(false);
+        if (onAnimationComplete) {
+          onAnimationComplete();
+        }
       }
     };
     animRef.current = requestAnimationFrame(tick);
-  }, [pathLength]);
+  }, [pathLength, onAnimationComplete]);
 
-  const dashOffset = pathLength * (1 - progress);
+  useEffect(() => {
+    if (pathLength > 0 && !hasStarted && !isFirstLoad) {
+      const t = setTimeout(() => startAnimation(), 400);
+      return () => clearTimeout(t);
+    }
+  }, [pathLength, hasStarted, isFirstLoad, startAnimation]);
+
+  const activeProgress = isFirstLoad ? scrollProgress : timeProgress;
+  const dashOffset = pathLength * (1 - activeProgress);
+
+  // Calculate Zoom and Pan
+  const VIEWBOX_CX = 130;
+  const VIEWBOX_CY = 165;
+  const INITIAL_SCALE = 6.0;
+
+  let currentScale = 1;
+  let translateX = 0;
+  let translateY = 0;
+
+  if (isFirstLoad && pathRef.current && pathLength > 0) {
+    const safeProgress = Math.min(0.999, activeProgress); // avoid exceeding length
+    const pt = pathRef.current.getPointAtLength(pathLength * safeProgress);
+    
+    if (activeProgress <= 0.8) {
+      currentScale = INITIAL_SCALE;
+      translateX = VIEWBOX_CX - pt.x * currentScale;
+      translateY = VIEWBOX_CY - pt.y * currentScale;
+    } else {
+      const zoomProgress = (activeProgress - 0.8) / 0.2;
+      // ease zoom out for smoother ending
+      const easedZoom = Math.sin((zoomProgress * Math.PI) / 2);
+
+      currentScale = INITIAL_SCALE + (1 - INITIAL_SCALE) * easedZoom;
+      
+      const targetX = VIEWBOX_CX - pt.x * currentScale;
+      const targetY = VIEWBOX_CY - pt.y * currentScale;
+      
+      translateX = targetX + (0 - targetX) * easedZoom;
+      translateY = targetY + (0 - targetY) * easedZoom;
+    }
+  }
 
   return (
     <div className="relative w-full h-full flex items-center justify-center pointer-events-none">
@@ -97,63 +141,70 @@ export default function SkullAnimation() {
           </filter>
         </defs>
 
-        {/* Labeled dots */}
-        {dotPositions.map((d, i) => (
-          <circle
-            key={`dot-${i}`}
-            cx={d.x}
-            cy={d.y}
-            r={4.5}
-            fill="#e8a849"
-            stroke="#d4913a"
-            strokeWidth={0.6}
+        <g 
+          style={{
+            transform: `translate(${translateX}px, ${translateY}px) scale(${currentScale})`,
+            transformOrigin: "0 0",
+          }}
+        >
+          {/* Labeled dots */}
+          {dotPositions.map((d, i) => (
+            <circle
+              key={`dot-${i}`}
+              cx={d.x}
+              cy={d.y}
+              r={4.5}
+              fill="#e8a849"
+              stroke="#d4913a"
+              strokeWidth={0.6}
+              style={{
+                opacity: activeProgress >= d.fraction ? 1 : 0.3,
+                transition: "opacity 0.3s ease",
+              }}
+            />
+          ))}
+
+          {/* Main stroke – thick hand-drawn line */}
+          <path
+            ref={pathRef}
+            d={HEAD_PATH}
+            fill="none"
+            stroke="#2a2a2a"
+            strokeWidth={5.5}
+            strokeLinecap="round"
+            strokeLinejoin="round"
             style={{
-              opacity: progress >= d.fraction ? 1 : 0.3,
-              transition: "opacity 0.3s ease",
+              strokeDasharray: pathLength || 3000,
+              strokeDashoffset: dashOffset,
+              filter: "url(#pencil)",
             }}
           />
-        ))}
 
-        {/* Main stroke – thick hand-drawn line */}
-        <path
-          ref={pathRef}
-          d={HEAD_PATH}
-          fill="none"
-          stroke="#2a2a2a"
-          strokeWidth={5.5}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          style={{
-            strokeDasharray: pathLength || 3000,
-            strokeDashoffset: dashOffset,
-            filter: "url(#pencil)",
-          }}
-        />
-
-        {/* Labels – fade in when pencil reaches each dot */}
-        {dotPositions.map((d, i) => {
-          const revealed = progress >= d.fraction;
-          const anchor = d.side === "right" ? "start" : "end";
-          return (
-            <text
-              key={`label-${i}`}
-              x={d.x + d.offsetX}
-              y={d.y + d.offsetY}
-              textAnchor={anchor}
-              fill={d.color}
-              fontSize={18}
-              fontFamily="'Caveat', cursive"
-              fontWeight={600}
-              style={{
-                opacity: revealed ? 1 : 0,
-                transform: revealed ? "translateY(0)" : "translateY(5px)",
-                transition: "opacity 0.5s ease, transform 0.5s ease",
-              }}
-            >
-              {d.label}
-            </text>
-          );
-        })}
+          {/* Labels – fade in when pencil reaches each dot */}
+          {dotPositions.map((d, i) => {
+            const revealed = activeProgress >= d.fraction;
+            const anchor = d.side === "right" ? "start" : "end";
+            return (
+              <text
+                key={`label-${i}`}
+                x={d.x + d.offsetX}
+                y={d.y + d.offsetY}
+                textAnchor={anchor}
+                fill={d.color}
+                fontSize={18}
+                fontFamily="'Caveat', cursive"
+                fontWeight={600}
+                style={{
+                  opacity: revealed ? 1 : 0,
+                  transform: revealed ? "translateY(0)" : "translateY(5px)",
+                  transition: "opacity 0.5s ease, transform 0.5s ease",
+                }}
+              >
+                {d.label}
+              </text>
+            );
+          })}
+        </g>
       </svg>
     </div>
   );
