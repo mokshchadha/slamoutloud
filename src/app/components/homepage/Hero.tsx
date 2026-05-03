@@ -18,6 +18,18 @@ export default function Hero() {
   const [scrollProgress, setScrollProgress] = useState(0);
   // 0‒1 raw progress across ALL phases
   const [globalProgress, setGlobalProgress] = useState(0);
+  // True once window 'load' fires – meaning all scripts/fonts/requests are done
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    if (document.readyState === 'complete') {
+      setIsReady(true);
+    } else {
+      const onLoad = () => setIsReady(true);
+      window.addEventListener('load', onLoad);
+      return () => window.removeEventListener('load', onLoad);
+    }
+  }, []);
 
   useEffect(() => {
     const hasPlayed = sessionStorage.getItem('skullAnimDone');
@@ -85,11 +97,41 @@ export default function Hero() {
   const phase3In = drawingComplete && phase >= 3;
 
   return (
-    <section
-      ref={containerRef}
-      className={`relative w-full bg-[#fffcf5] ${isFirstLoad ? `h-[${TOTAL_PHASES * 100}vh]` : 'min-h-[calc(100vh-80px)]'} flex flex-col`}
-      style={{ height: isFirstLoad ? `${TOTAL_PHASES * 100}vh` : undefined }}
-    >
+    <>
+      {/* Full-screen loading overlay – shown until SVG path is measured */}
+      {!isReady && (
+        <div
+          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#fffcf5]"
+          aria-label="Loading"
+        >
+          {/* Animated skull-pen spinner */}
+          <div className="relative flex flex-col items-center gap-6">
+            {/* Spinning ring */}
+            <div
+              className="w-16 h-16 rounded-full border-4 border-[#e8e0d0] border-t-[#e8a849]"
+              style={{ animation: "spin 1s linear infinite" }}
+            />
+            {/* Dotted trail beneath */}
+            <p
+              className="text-sm tracking-widest uppercase text-[#9a9a9a] font-semibold"
+              style={{ letterSpacing: "0.18em" }}
+            >
+              Connecting the dots…
+            </p>
+          </div>
+          <style>{`
+            @keyframes spin {
+              to { transform: rotate(360deg); }
+            }
+          `}</style>
+        </div>
+      )}
+
+      <section
+        ref={containerRef}
+        className={`relative w-full bg-[#fffcf5] ${isFirstLoad ? `h-[${TOTAL_PHASES * 100}vh]` : 'min-h-[calc(100vh-80px)]'} flex flex-col`}
+        style={{ height: isFirstLoad ? `${TOTAL_PHASES * 100}vh` : undefined }}
+      >
       <div className={`w-full flex flex-col items-center justify-center px-8 pt-2 pb-8 overflow-hidden ${isFirstLoad ? 'sticky top-0 h-screen' : 'min-h-[calc(100vh-80px)] relative'}`}>
 
         {/* Scroll Prompt – only while at very start */}
@@ -119,7 +161,7 @@ export default function Hero() {
         )}
 
         {/* Main Container */}
-        <div className="relative w-full max-w-4xl mx-auto flex flex-col items-center">
+        <div className={`relative w-full max-w-4xl mx-auto flex flex-col items-center transition-opacity duration-500 ${isReady ? 'opacity-100' : 'opacity-0'}`}>
 
           {/* Phase 1 top text – "It takes" */}
           <div
@@ -204,6 +246,7 @@ export default function Hero() {
 
         </div>
       </div>
-    </section>
+      </section>
+    </>
   );
 }
