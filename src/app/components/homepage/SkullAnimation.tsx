@@ -208,7 +208,7 @@ export default function SkullAnimation({
             strokeLinejoin="round"
             style={{
               strokeDasharray: pathLength || 3000,
-              strokeDashoffset: dashOffset,
+              strokeDashoffset: pathLength === 0 ? 3000 : dashOffset,
               filter: "url(#pencil)",
             }}
           />

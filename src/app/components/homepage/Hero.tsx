@@ -10,7 +10,7 @@ import SkullAnimation from './SkullAnimation';
  *  Phase 2  (2–3):   "But across India … focus only on"   – left 3 lit, right 4 grey
  *  Phase 3  (3–4):   "meanwhile these essential skills …" – right 4 lit, left 3 grey
  */
-const TOTAL_PHASES = 4; // number of viewports of scroll space
+const TOTAL_PHASES = 5; // number of viewports of scroll space
 
 export default function Hero() {
   const [isFirstLoad, setIsFirstLoad] = useState(true);
