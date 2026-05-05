@@ -1,37 +1,59 @@
+"use client";
 import React from 'react';
+import { motion } from 'framer-motion';
 
 export default function VisionMission() {
+  const fadeInLeft = {
+    initial: { opacity: 0, x: -60 },
+    whileInView: { opacity: 1, x: 0 },
+    viewport: { once: true },
+    transition: { duration: 0.8 }
+  };
+
+  const fadeInRight = {
+    initial: { opacity: 0, x: 60 },
+    whileInView: { opacity: 1, x: 0 },
+    viewport: { once: true },
+    transition: { duration: 0.8 }
+  };
+
   return (
-    <section className="w-full bg-[#fffcf5] pt-20 lg:pt-32 font-sans overflow-hidden">
+    <section className="w-full bg-[#fffcf5] pt-20 pb-15 lg:pt-32 font-sans overflow-hidden">
       <div className="max-w-7xl mx-auto w-full">
         {/* --- DESKTOP VIEW --- */}
         <div className="hidden md:flex flex-row px-8 lg:px-20 gap-16 lg:gap-32 w-full justify-center text-[#1a1a1a]">
           
           {/* Left Column (Vision) */}
-          <div className="flex-1 flex flex-col relative max-w-[500px]">
+          <motion.div 
+            {...fadeInLeft}
+            className="flex-1 flex flex-col relative max-w-[500px]"
+          >
             {/* The line for Vision - standard length */}
-            <div className="w-[2px] h-[100px] lg:h-[130px] bg-[#1a1a1a] mb-8 rounded-full" />
+            <div className="w-[1.5px] h-[100px] lg:h-[130px] bg-[#1a1a1a] mb-6" />
             
-            <p className="text-base lg:text-lg font-medium mb-5 tracking-wide">
+            <p className="text-[12px] lg:text-[14px] font-bold mb-4 tracking-wide uppercase text-[#1a1a1a]">
               Our Vision
             </p>
-            <h2 className="text-3xl lg:text-4xl font-bold leading-snug lg:leading-[1.25] max-w-[420px]">
+            <h2 className="text-[18px] lg:text-[26px] leading-[1.3] max-w-[420px] text-[#1a1a1a]">
               Every child will have a voice that enables them to change lives.
             </h2>
-          </div>
+          </motion.div>
 
           {/* Right Column (Mission) */}
-          <div className="flex-1 flex flex-col relative max-w-[500px]">
+          <motion.div 
+            {...fadeInRight}
+            className="flex-1 flex flex-col relative max-w-[500px]"
+          >
             {/* The line for Mission - longer to push it down */}
-            <div className="w-[2px] h-[260px] lg:h-[320px] bg-[#1a1a1a] mb-8 rounded-full" />
+            <div className="w-[1.5px] h-[260px] lg:h-[320px] bg-[#1a1a1a] mb-6" />
             
-            <p className="text-base lg:text-lg font-medium mb-5 tracking-wide">
+            <p className="text-[12px] lg:text-[14px] font-bold mb-4 tracking-wide uppercase text-[#1a1a1a]">
               Our Mission
             </p>
-            <h2 className="text-3xl lg:text-4xl font-bold leading-snug lg:leading-[1.25] pr-4">
+            <h2 className="text-[18px] lg:text-[26px] leading-[1.3] pr-4 text-[#1a1a1a]">
               Make Social-Emotional Learning (SEL) an integrated part of the curriculum in schools across India.
             </h2>
-          </div>
+          </motion.div>
 
         </div>
 
@@ -43,34 +65,40 @@ export default function VisionMission() {
             {/* The gap for the Left Long Line */}
             <div className="w-[32px] shrink-0 relative">
                {/* This line goes all the way down, passing the Vision block, into the margin before Mission */}
-               <div className="absolute top-0 left-0 w-[2.5px] bg-[#1a1a1a] rounded-full" style={{ height: 'calc(100% + 40px)' }} />
+               <div className="absolute top-0 left-0 w-[1.5px] bg-[#1a1a1a]" style={{ height: 'calc(100% + 40px)' }} />
             </div>
 
             {/* Vision Info */}
-            <div className="flex-1 flex flex-col relative">
+            <motion.div 
+              {...fadeInLeft}
+              className="flex-1 flex flex-col relative"
+            >
                {/* The shorter line for Vision */}
-               <div className="absolute top-0 left-0 w-[2.5px] h-[80px] bg-[#1a1a1a] rounded-full" />
+               <div className="absolute top-0 left-0 w-[1.5px] h-[80px] bg-[#1a1a1a]" />
                
                <div className="pt-[100px]">
-                 <p className="text-[15px] font-medium mb-3 tracking-wide text-gray-800">
+                 <p className="text-[12px] font-bold mb-3 tracking-wide text-[#1a1a1a] uppercase">
                    Our Vision
                  </p>
-                 <h2 className="text-[28px] leading-[1.3] font-bold pr-2">
+                 <h2 className="text-[18px] leading-[1.3] font-bold pr-2 text-[#1a1a1a]">
                    Every child will have a voice that enables them to change lives.
                  </h2>
                </div>
-            </div>
+            </motion.div>
           </div>
 
           {/* Mission Info */}
-           <div className="flex flex-col w-full mt-[60px] relative">
-             <p className="text-[15px] font-medium mb-3 tracking-wide text-gray-800">
+           <motion.div 
+             {...fadeInRight}
+             className="flex flex-col w-full mt-[60px] relative"
+           >
+             <p className="text-[12px] font-bold mb-3 tracking-wide text-[#1a1a1a] uppercase">
                Our Mission
              </p>
-             <h2 className="text-[28px] leading-[1.3] font-bold pr-2">
+             <h2 className="text-[18px] leading-[1.3] font-bold pr-2 text-[#1a1a1a]">
                Make Social-Emotional Learning (SEL) an integrated part of the curriculum in schools across India.
              </h2>
-          </div>
+          </motion.div>
 
         </div>
 

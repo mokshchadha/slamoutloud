@@ -18,8 +18,8 @@ export default function Home() {
       <Hero />
       <DidYouKnow />
       <WeareSOL />
-      <FAQs />
       <VisionMission />
+      <FAQs />
       <OurImpact />
       <ChildrensHighlight />
       <Programmes />

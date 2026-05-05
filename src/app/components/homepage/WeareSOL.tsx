@@ -1,24 +1,43 @@
+"use client";
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 
 export default function WeareSOL() {
+  const fadeInUp = {
+    initial: { opacity: 0, y: 40 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true },
+    transition: { duration: 0.8 }
+  };
+
   return (
-    <section className="relative w-full bg-[#fffcf5] flex flex-col items-center pt-16 md:pt-24 overflow-hidden pt-12">
+    <section className="relative w-full bg-[#fffcf5] flex flex-col items-center pt-16 md:pt-24 overflow-hidden">
       
       {/* Text Content */}
-      <div className="flex flex-col items-center px-4 w-full max-w-[90%] md:max-w-4xl mx-auto z-10">
-        <p className="text-xl md:text-2xl text-black font-medium font-sans">
+      <div className="flex flex-col items-center px-4 w-full max-w-[95%] md:max-w-4xl mx-auto z-10">
+        <motion.p 
+          {...fadeInUp}
+          className="text-lg md:text-xl text-black font-medium font-sans"
+        >
           We are
-        </p>
+        </motion.p>
         
-        <h1 className="text-6xl sm:text-7xl md:text-[110px] font-bold text-[#f56f7b] mt-4 md:mt-6 leading-none tracking-tight">
+        <motion.h1 
+          {...fadeInUp}
+          transition={{ ...fadeInUp.transition, delay: 0.1 }}
+          className="text-5xl sm:text-6xl md:text-[90px] font-bold text-[#f56f7b] mt-4 md:mt-6 leading-none tracking-tight"
+        >
           Slam Out Loud
-        </h1>
+        </motion.h1>
         
-        <div className="mt-8 md:mt-12 text-center w-full max-w-2xl md:max-w-3xl">
-          <p className="text-lg md:text-2xl italic text-black font-sans leading-relaxed">
+        <motion.div 
+          {...fadeInUp}
+          transition={{ ...fadeInUp.transition, delay: 0.2 }}
+          className="mt-6 md:mt-10 text-center w-full max-w-[500px] md:max-w-[700px]"
+        >
+          <p className="text-sm sm:text-base md:text-xl italic text-black font-sans leading-relaxed">
             A non-profit using transformational power of performing and visual arts to build{" "}
-            <br className="hidden md:block" />
-            <span className="relative inline-block">
+            <span className="relative inline-block whitespace-nowrap">
               Social Emotional Learning (SEL)
               {/* Teal chalk underline */}
               <svg className="absolute bottom-[-4px] md:bottom-[-8px] left-0 w-full h-[8px] md:h-[12px]" viewBox="0 0 200 9" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
@@ -27,11 +46,15 @@ export default function WeareSOL() {
             </span>
             {" "}in children.
           </p>
-        </div>
+        </motion.div>
       </div>
 
       {/* Illustration */}
-      <div className="w-full max-w-5xl mx-auto mt-12 md:mt-16 px-4 md:px-8">
+      <motion.div 
+        {...fadeInUp}
+        transition={{ ...fadeInUp.transition, delay: 0.3 }}
+        className="w-full max-w-4xl mx-auto mt-10 md:mt-14 px-6 md:px-12"
+      >
         <Image 
           src="/weare_sol.png" 
           alt="We are Slam Out Loud illustration with characters playing instruments" 
@@ -40,7 +63,7 @@ export default function WeareSOL() {
           className="w-full h-auto object-contain"
           priority
         />
-      </div>
+      </motion.div>
     </section>
   );
 }
