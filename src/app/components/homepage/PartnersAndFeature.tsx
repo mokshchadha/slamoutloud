@@ -33,9 +33,9 @@ export default function PartnersAndFeature() {
   const featuredSets = Array.from({ length: duplicates });
 
   return (
-    <section className="w-full bg-[#4bb29a] py-16 overflow-hidden text-white flex flex-col gap-12 sm:gap-16">
+    <div className="w-full overflow-hidden text-white flex flex-col">
       {/* Our Partners Section */}
-      <div className="flex flex-col gap-6 w-full max-w-[100vw]">
+      <section className="bg-[#fb747b] py-12 md:py-16 flex flex-col gap-6 w-full">
         <h2 className="text-xl md:text-3xl font-bold px-6 md:px-16 mb-4">
           Our Partners
         </h2>
@@ -65,10 +65,10 @@ export default function PartnersAndFeature() {
             ))}
           </div>
         </div>
-      </div>
+      </section>
 
       {/* Featured In Section */}
-      <div className="flex flex-col gap-6 w-full max-w-[100vw]">
+      <section className="bg-[#4bb29a] py-12 md:py-16 flex flex-col gap-6 w-full">
         <h2 className="text-xl md:text-3xl font-bold px-6 md:px-16 mb-4">
           Featured In
         </h2>
@@ -77,7 +77,7 @@ export default function PartnersAndFeature() {
             {featuredSets.map((_, setIdx) => (
               <div
                 key={`featured-set-${setIdx}`}
-                className="flex animate-scroll-right items-center w-max shrink-0 pl-12 md:pl-16 gap-12 md:gap-16 justify-end"
+                className="flex animate-scroll-right items-center w-max shrink-0 pl-12 md:pr-16 gap-12 md:gap-16 justify-end"
                 aria-hidden={setIdx !== 0}
               >
                 {featuredFiles.map((file, idx) => (
@@ -98,7 +98,7 @@ export default function PartnersAndFeature() {
             ))}
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }
