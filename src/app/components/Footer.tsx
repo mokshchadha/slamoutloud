@@ -1,4 +1,6 @@
 import React from 'react';
+import Link from 'next/link';
+
 
 export default function Footer() {
   return (
@@ -56,7 +58,8 @@ export default function Footer() {
             <ul className="flex flex-col gap-4 opacity-70">
               <li><a href="#" className="hover:opacity-100 transition-opacity text-lg font-medium">Contact</a></li>
               <li><a href="#" className="hover:opacity-100 transition-opacity text-lg font-medium">Support</a></li>
-              <li><a href="#" className="hover:opacity-100 transition-opacity text-lg font-medium">Legal</a></li>
+              <li><Link href="/privacy" className="hover:opacity-100 transition-opacity text-lg font-medium">Privacy Policy</Link></li>
+
             </ul>
           </div>
         </div>
