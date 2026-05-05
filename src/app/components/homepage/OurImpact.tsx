@@ -1,6 +1,61 @@
 import Image from 'next/image';
+import Counter from './Counter';
+import StackedBarChart from './StackedBarChart';
 
 export default function OurImpact() {
+  const selBars = [
+    {
+      label: 'Curiosity',
+      segments: [
+        { label: '25% Growth', value: 26.64, color: '#ff8282' },
+        { label: '50% Growth', value: 8.32, color: '#f8b661' },
+        { label: '75% Growth', value: 1.33, color: '#36a295' },
+      ],
+    },
+    {
+      label: 'Analytical Thinking',
+      segments: [
+        { label: '25% Growth', value: 15.05, color: '#ff8282' },
+        { label: '50% Growth', value: 1.18, color: '#f8b661' },
+      ],
+    },
+    {
+      label: 'Imagination',
+      segments: [
+        { label: '25% Growth', value: 24.29, color: '#ff8282' },
+        { label: '50% Growth', value: 2.47, color: '#f8b661' },
+        { label: '75% Growth', value: 0.27, color: '#36a295' },
+      ],
+    },
+  ];
+
+  const climateBars = [
+    {
+      label: 'Appreciation of Nature',
+      segments: [
+        { label: '25% Growth', value: 35.14, color: '#ff8282' },
+        { label: '50% Growth', value: 13.00, color: '#f8b661' },
+        { label: '75% Growth', value: 1.54, color: '#36a295' },
+      ],
+    },
+    {
+      label: 'Local Sense of Environment',
+      segments: [
+        { label: '25% Growth', value: 24.78, color: '#ff8282' },
+        { label: '50% Growth', value: 5.61, color: '#f8b661' },
+        { label: '75% Growth', value: 0.21, color: '#36a295' },
+      ],
+    },
+    {
+      label: 'Personal Agency for Environment',
+      segments: [
+        { label: '25% Growth', value: 25.11, color: '#ff8282' },
+        { label: '50% Growth', value: 4.72, color: '#f8b661' },
+        { label: '75% Growth', value: 0.13, color: '#36a295' },
+      ],
+    },
+  ];
+
   return (
     <section className="w-full bg-[#fffcf5] py-16 md:py-24 px-6 md:px-12 flex justify-center overflow-hidden">
       <div className="max-w-7xl w-full flex flex-col gap-16 md:gap-24">
@@ -27,7 +82,7 @@ export default function OurImpact() {
                 Our Impact
               </h3>
               <p className="text-2xl md:text-[32px] md:leading-[1.2] text-gray-900 font-medium font-sans">
-                Data from 4000+ children across 4 cities (2024)
+                Data from <Counter value={4000} from={3950} suffix="+" duration={4} /> children across 4 cities (2024)
               </p>
             </div>
 
@@ -36,7 +91,7 @@ export default function OurImpact() {
               {/* Stat Box 1 */}
               <div className="flex-1 flex flex-col gap-2">
                 <h2 className="text-5xl md:text-6xl font-extrabold text-black font-sans tracking-tight">
-                  700,000
+                  <Counter value={700000} from={699950} duration={4} />
                 </h2>
                 <p className="text-sm md:text-base text-gray-800 font-sans leading-relaxed">
                   Children directly enabled with SEL skills across 4 states and New Delhi, India.
@@ -49,8 +104,8 @@ export default function OurImpact() {
 
               {/* Stat Box 2 */}
               <div className="flex-1 flex flex-col gap-2">
-                <h2 className="text-5xl md:text-6xl font-extrabold text-black font-sans tracking-tight">
-                  20 million
+                <h2 className="text-4xl md:text-5xl font-extrabold text-black font-sans tracking-tight">
+                  <Counter value={20000000} from={19999950} prefix="> " duration={4} />
                 </h2>
                 <p className="text-sm md:text-base text-gray-800 font-sans leading-relaxed">
                   Children reached through digital resources.
@@ -61,24 +116,22 @@ export default function OurImpact() {
         </div>
 
         {/* Bottom Part: Graphs */}
-        <div className="flex flex-col md:flex-row items-center justify-center gap-12 md:gap-16 w-full">
+        <div className="flex flex-col md:flex-row items-start justify-center gap-12 md:gap-16 w-full">
           {/* Graph 1 */}
-          <div className="relative w-full md:w-1/2 max-w-lg aspect-[5/4] md:aspect-[4/3]">
-            <Image
-              src="/our_impact_graph1.png"
-              alt="Growth in SEL competencies graph"
-              fill
-              className="object-contain"
+          <div className="w-full md:w-1/2">
+            <StackedBarChart 
+              title="Growth in SEL competencies" 
+              bars={selBars} 
+              yMax={40}
             />
           </div>
 
           {/* Graph 2 */}
-          <div className="relative w-full md:w-1/2 max-w-lg aspect-[5/4] md:aspect-[4/3]">
-            <Image
-              src="/our_impact_graph2.png"
-              alt="Growth in climate competencies graph"
-              fill
-              className="object-contain"
+          <div className="w-full md:w-1/2">
+            <StackedBarChart 
+              title="Growth in climate competencies" 
+              bars={climateBars} 
+              yMax={50}
             />
           </div>
         </div>
