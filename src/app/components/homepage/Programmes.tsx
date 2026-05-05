@@ -1,4 +1,6 @@
+"use client";
 import Image from 'next/image';
+import { motion } from 'framer-motion';
 
 export default function Programmes() {
   return (
@@ -16,7 +18,13 @@ export default function Programmes() {
         <div className="flex-1 flex flex-col lg:flex-row items-center lg:items-start justify-center gap-24 lg:gap-0 pt-8 lg:pt-12">
           
           {/* Card 1: Art For All */}
-          <div className="relative w-full max-w-[420px] bg-[#4ba39c] p-8 md:p-10 shadow-sm -rotate-2 top-0 lg:top-4 z-20 flex-1 lg:max-h-[460px]">
+          <motion.div 
+            initial={{ opacity: 0, x: -100, rotate: -2 }}
+            whileInView={{ opacity: 1, x: 0, rotate: -2 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="relative w-full max-w-[420px] bg-[#4ba39c] p-8 md:p-10 shadow-sm top-0 lg:top-4 z-20 flex-1 lg:max-h-[460px]"
+          >
             {/* Pencil Illustration */}
             <div className="absolute -left-12 md:-left-[140px] lg:-left-[180px] -bottom-8 md:-bottom-12 w-44 md:w-[240px] lg:w-[280px] aspect-[1/3] z-30 pointer-events-none text-red-500">
               <Image 
@@ -40,10 +48,16 @@ export default function Programmes() {
                 </a>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Card 2: Jijivisha Fellowship */}
-          <div className="relative w-full max-w-[420px] bg-[#fcb060] p-8 md:p-10 shadow-sm rotate-3 z-10 flex-1 lg:mt-12 lg:-ml-8 lg:max-h-[460px]">
+          <motion.div 
+            initial={{ opacity: 0, x: 100, rotate: 3 }}
+            whileInView={{ opacity: 1, x: 0, rotate: 3 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+            className="relative w-full max-w-[420px] bg-[#fcb060] p-8 md:p-10 shadow-sm z-10 flex-1 lg:mt-12 lg:-ml-8 lg:max-h-[460px]"
+          >
             {/* Sun Illustration */}
             <div className="absolute -top-24 md:-top-[160px] lg:-top-[200px] -right-16 md:-right-[180px] lg:-right-[220px] w-56 md:w-[320px] lg:w-[400px] aspect-[4/3] z-30 pointer-events-none">
               <Image 
@@ -67,7 +81,7 @@ export default function Programmes() {
                 </a>
               </div>
             </div>
-          </div>
+          </motion.div>
 
         </div>
       </div>
