@@ -4,7 +4,14 @@ import { useRef, useEffect, useState } from 'react';
 
 function LazyVideo({ src, poster }: { src?: string; poster: string }) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [duration, setDuration] = useState(0);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -14,24 +21,173 @@ function LazyVideo({ src, poster }: { src?: string; poster: string }) {
           observer.disconnect();
         }
       },
-      { rootMargin: '200px' } // start loading 200px before it enters view
+      { rootMargin: '200px' }
     );
-
-    if (videoRef.current) observer.observe(videoRef.current);
+    if (containerRef.current) observer.observe(containerRef.current);
     return () => observer.disconnect();
   }, []);
 
+  const handlePlayPause = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const video = videoRef.current;
+    if (!video) return;
+    if (video.paused) {
+      video.play();
+      setIsPlaying(true);
+    } else {
+      video.pause();
+      setIsPlaying(false);
+    }
+  };
+
+  const handleMute = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const video = videoRef.current;
+    if (!video) return;
+    video.muted = !video.muted;
+    setIsMuted(video.muted);
+  };
+
+  const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const video = videoRef.current;
+    if (!video) return;
+    const val = Number(e.target.value);
+    video.currentTime = (val / 100) * video.duration;
+    setProgress(val);
+  };
+
+  const formatTime = (s: number) => {
+    const m = Math.floor(s / 60);
+    const sec = Math.floor(s % 60);
+    return `${m}:${sec.toString().padStart(2, '0')}`;
+  };
+
+  // Centre play button: only when paused
+  const showCentre = !isPlaying;
+  // Controls bar: only while playing AND hovering
+  const showControls = isPlaying && isHovered;
+
   return (
-    <video
-      ref={videoRef}
-      src={isVisible ? src : undefined}
-      poster={poster}       // shows a thumbnail until video loads
-      preload="none"        // don't load anything until triggered
-      controls
-      muted
-      playsInline
-      className="w-full h-full object-cover"
-    />
+    <div
+      ref={containerRef}
+      className="relative w-full aspect-[16/9] overflow-hidden bg-black cursor-pointer group"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onClick={handlePlayPause}
+    >
+      {/* Video */}
+      <video
+        ref={videoRef}
+        src={isVisible ? src : undefined}
+        poster={poster}
+        preload="none"
+        playsInline
+        onCanPlay={() => setIsLoaded(true)}
+        onEnded={() => setIsPlaying(false)}
+        onTimeUpdate={() => {
+          const v = videoRef.current;
+          if (v && v.duration) setProgress((v.currentTime / v.duration) * 100);
+        }}
+        onLoadedMetadata={() => {
+          const v = videoRef.current;
+          if (v) setDuration(v.duration);
+        }}
+        className="w-full h-full object-cover"
+      />
+
+      {/* Gradient scrim — only when controls are visible */}
+      <div
+        className={`absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none transition-opacity duration-200 ${
+          showControls ? 'opacity-100' : 'opacity-0'
+        }`}
+      />
+
+      {/* Centre play button — only when paused */}
+      <div
+        className={`absolute inset-0 flex items-center justify-center transition-opacity duration-200 pointer-events-none ${
+          showCentre ? 'opacity-100' : 'opacity-0'
+        }`}
+      >
+        <div
+          className="flex items-center justify-center rounded-full border border-white/50 bg-black/30 backdrop-blur-sm"
+          style={{ width: 52, height: 52 }}
+        >
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+            <path d="M5 2.5L15.5 9L5 15.5V2.5Z" fill="white" />
+          </svg>
+        </div>
+      </div>
+
+{/*  
+      {isVisible && !isLoaded && (
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div
+            className="rounded-full border-2 border-white/30 border-t-white animate-spin"
+            style={{ width: 28, height: 28 }}
+          />
+        </div>
+      )} */}
+
+      {/* Bottom controls — only while playing + hovering */}
+      <div
+        className={`absolute bottom-0 left-0 right-0 px-3 pb-3 pt-6 transition-opacity duration-200 ${
+          showControls ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        }`}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <input
+          type="range"
+          min={0}
+          max={100}
+          step={0.1}
+          value={progress}
+          onChange={handleSeek}
+          onMouseDown={(e) => e.stopPropagation()}
+          onTouchStart={(e) => e.stopPropagation()}
+          className="w-full mb-2 accent-white"
+          style={{
+            height: 3,
+            cursor: 'pointer',
+            appearance: 'none' as const,
+            background: `linear-gradient(to right, white ${progress}%, rgba(255,255,255,0.3) ${progress}%)`,
+            borderRadius: 2,
+            outline: 'none',
+            touchAction: 'none',
+          }}
+        />
+
+        <div className="flex items-center gap-3">
+          <button onClick={handlePlayPause} className="text-white hover:text-white/80 transition-colors">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <rect x="2" y="1" width="4" height="14" rx="1.5" fill="currentColor" />
+              <rect x="10" y="1" width="4" height="14" rx="1.5" fill="currentColor" />
+            </svg>
+          </button>
+
+          <button onClick={handleMute} className="text-white hover:text-white/80 transition-colors">
+            {isMuted ? (
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M2 5.5H4.5L8 2v12l-3.5-3.5H2V5.5Z" fill="currentColor" />
+                <line x1="11" y1="5" x2="15" y2="11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                <line x1="15" y1="5" x2="11" y2="11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+              </svg>
+            ) : (
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M2 5.5H4.5L8 2v12l-3.5-3.5H2V5.5Z" fill="currentColor" />
+                <path d="M10.5 5.5C11.5 6.5 12 7.2 12 8s-.5 1.5-1.5 2.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                <path d="M12.5 3.5C14.2 5.2 15 6.5 15 8s-.8 2.8-2.5 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+              </svg>
+            )}
+          </button>
+
+          {duration > 0 && (
+            <span className="text-white/70 text-xs tabular-nums">
+              {formatTime((progress / 100) * duration)} / {formatTime(duration)}
+            </span>
+          )}
+        </div>
+      </div>
+    </div>
   );
 }
 
