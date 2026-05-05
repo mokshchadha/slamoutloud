@@ -52,7 +52,7 @@ export default function Media() {
   return (
     <section className="bg-[#F9B969] flex flex-col w-full py-12 md:py-20 font-sans">
       <div className="container mx-auto px-6 md:px-16 lg:px-24">
-        <h2 className="text-black font-bold text-lg md:text-xl lg:text-2xl mb-8 md:mb-12">
+        <h2 className="text-black font-bold text-base md:text-lg lg:text-xl mb-8 md:mb-12">
           Media
         </h2>
         <div className="flex flex-col border-t-2 border-black/80">
@@ -66,10 +66,10 @@ export default function Media() {
               >
                 {/* Header (Question + Icon) */}
                 <div 
-                  className="flex items-center justify-between py-6 md:py-8 lg:py-10 cursor-pointer"
+                  className="flex items-center justify-between py-2 md:py-8 lg:py-10 cursor-pointer"
                   onClick={() => toggleAccordion(index)}
                 >
-                  <h3 className="text-xl md:text-3xl lg:text-[40px] leading-tight font-medium text-black max-w-[85%]">
+                  <h3 className="text-lg md:text-[22px] lg:text-[26px] leading-tight font-medium text-black max-w-[85%]">
                     {item.title}
                   </h3>
                   <div
@@ -114,14 +114,14 @@ export default function Media() {
                       
                       {/* Right Content (Text) */}
                       <div className="w-full lg:w-1/2 flex flex-col justify-center text-left">
-                        <p className="text-base md:text-lg lg:text-xl font-medium text-black leading-relaxed mb-8">
+                        <p className="text-sm md:text-base lg:text-base font-medium text-black leading-relaxed mb-8">
                           {item.content}
                         </p>
                         <Link 
                           href={item.link}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-4 text-black font-bold text-base md:text-lg hover:underline w-fit"
+                          className="inline-flex items-center gap-4 text-black font-bold text-sm md:text-base hover:underline w-fit"
                         >
                           Read More
                           <svg width="32" height="12" viewBox="0 0 32 12" fill="none" xmlns="http://www.w3.org/2000/svg">
