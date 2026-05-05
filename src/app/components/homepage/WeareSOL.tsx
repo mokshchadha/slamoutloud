@@ -11,7 +11,7 @@ export default function WeareSOL() {
   };
 
   return (
-    <section className="relative w-full bg-[#fffcf5] flex flex-col items-center pt-16 md:pt-24 overflow-hidden">
+    <section className="relative w-full bg-[#fffcf5] flex flex-col items-center pt-6 md:pt-24 overflow-hidden">
       
       {/* Text Content */}
       <div className="flex flex-col items-center px-4 w-full max-w-[95%] md:max-w-4xl mx-auto z-10">
