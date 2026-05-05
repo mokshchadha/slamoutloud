@@ -1,23 +1,62 @@
-import Image from 'next/image';
+'use client';
+
+import { useRef, useEffect, useState } from 'react';
+
+function LazyVideo({ src, poster }: { src?: string; poster: string }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '200px' } // start loading 200px before it enters view
+    );
+
+    if (videoRef.current) observer.observe(videoRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <video
+      ref={videoRef}
+      src={isVisible ? src : undefined}
+      poster={poster}       // shows a thumbnail until video loads
+      preload="none"        // don't load anything until triggered
+      controls
+      muted
+      playsInline
+      className="w-full h-full object-cover"
+    />
+  );
+}
 
 const highlights = [
   {
     image: "/ch_numbers.png",
+    videoUrl: "https://pub-aee81a00e0fe433086dbd4d5f0c050e8.r2.dev/Numbers_Supriya.webm",
     name: "Supriya",
     description: "worn down by comparison, Supriya describes her creativity and joy fading under the weight of expectations."
   },
   {
     image: "/ch_abbas_tedx.png",
+    videoUrl: "https://pub-aee81a00e0fe433086dbd4d5f0c050e8.r2.dev/Abbas_Tedx.webm",
     name: "Abbas",
     description: "questions the cost of hiding one's dreams and fatigue within the relentless pace of a judgmental society."
   },
   {
     image: "/ch_mother_tongue.png",
+    videoUrl: "https://pub-aee81a00e0fe433086dbd4d5f0c050e8.r2.dev/Mother_Tongue_Muskan.webm",
     name: "Muskan",
     description: "questions identity and dignity through the lens of language, privilege, and a mother's interrupted education."
   },
   {
     image: "/ch_molbhav.png",
+    videoUrl: "https://pub-aee81a00e0fe433086dbd4d5f0c050e8.r2.dev/Mol_Bhav_Chanda_Jyoti.webm",
     name: "Chanda and Jyoti",
     description: "challenge the commodification of feelings, where even love and tears are weighed and priced."
   }
@@ -41,13 +80,11 @@ export default function ChildrensHighlight() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12">
           {highlights.map((item, index) => (
             <div key={index} className="flex flex-col gap-4">
-              {/* Image Container */}
+              {/* Video Container */}
               <div className="relative w-full aspect-[16/9] overflow-hidden bg-black/5">
-                <Image
-                  src={item.image}
-                  alt={item.name}
-                  fill
-                  className="object-cover"
+                <LazyVideo 
+                  src={item.videoUrl}
+                  poster={item.image}
                 />
               </div>
               
