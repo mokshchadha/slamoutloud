@@ -104,7 +104,7 @@ export default function OurImpact() {
 
               {/* Stat Box 2 */}
               <div className="flex-1 flex flex-col gap-2">
-                <h2 className="text-4xl md:text-5xl font-extrabold text-black font-sans tracking-tight">
+                <h2 className="text-4xl md:text-3.5xl font-extrabold text-black font-sans tracking-tight">
                   <Counter value={20000000} from={19999950} prefix="> " duration={4} />
                 </h2>
                 <p className="text-sm md:text-base text-gray-800 font-sans leading-relaxed">
