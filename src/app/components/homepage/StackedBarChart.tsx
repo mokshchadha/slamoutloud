@@ -67,11 +67,13 @@ export default function StackedBarChart({
               {bars.map((bar, barIdx) => (
                 <div
                   key={barIdx}
-                  className="flex flex-col-reverse w-full max-w-[80px] overflow-hidden rounded-t-sm"
+                  className="flex flex-col-reverse w-full max-w-[80px] overflow-visible rounded-t-sm"
                   style={{ height: '100%' }}
                 >
                   {bar.segments.map((segment, segIdx) => {
                     const heightPct = (segment.value / yMax) * 100;
+                    const isTopSegment = segIdx === bar.segments.length - 1;
+                    const isTooSmall = heightPct <= 5;
                     return (
                       <motion.div
                         key={segIdx}
@@ -86,9 +88,21 @@ export default function StackedBarChart({
                         style={{ backgroundColor: segment.color, flexShrink: 0 }}
                         className="relative w-full group"
                       >
-                        {heightPct > 5 && (
+                        {/* Label inside segment when large enough */}
+                        {!isTooSmall && (
                           <div className="absolute inset-0 flex items-center justify-center">
                             <span className="text-[9px] md:text-[10px] font-bold text-gray-800">
+                              {segment.value}%
+                            </span>
+                          </div>
+                        )}
+                        {/* Label outside (above) when segment is too small AND it's the top segment */}
+                        {isTooSmall && isTopSegment && (
+                          <div
+                            className="absolute w-full flex justify-center"
+                            style={{ top: '-18px' }}
+                          >
+                            <span className="text-[9px] md:text-[10px] font-bold text-gray-800 whitespace-nowrap">
                               {segment.value}%
                             </span>
                           </div>
