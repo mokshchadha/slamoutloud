@@ -22,13 +22,7 @@ export default function Hero() {
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
-    if (document.readyState === 'complete') {
-      setIsReady(true);
-    } else {
-      const onLoad = () => setIsReady(true);
-      window.addEventListener('load', onLoad);
-      return () => window.removeEventListener('load', onLoad);
-    }
+    setIsReady(true);
   }, []);
 
   useEffect(() => {

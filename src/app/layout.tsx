@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Montserrat, Geist_Mono } from "next/font/google";
+import { Montserrat, Geist_Mono, Patrick_Hand, Caveat } from "next/font/google";
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -12,7 +12,11 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-import { Patrick_Hand } from "next/font/google";
+const caveat = Caveat({
+  subsets: ["latin"],
+  variable: "--font-caveat",
+});
+
 import Header from "./components/Header";
 
 const patrickHand = Patrick_Hand({
@@ -32,9 +36,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${montserrat.variable} ${geistMono.variable} ${patrickHand.variable} antialiased`}
+        className={`${montserrat.variable} ${geistMono.variable} ${patrickHand.variable} ${caveat.variable} antialiased`}
       >
         <Header />
         {children}

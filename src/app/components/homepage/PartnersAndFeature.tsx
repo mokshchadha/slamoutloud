@@ -28,7 +28,7 @@ export default function PartnersAndFeature() {
   }
 
   // Create multiple duplicates to ensure seamless infinite scroll on any screen width
-  const duplicates = 4;
+  const duplicates = 2;
   const partnerSets = Array.from({ length: duplicates });
   const featuredSets = Array.from({ length: duplicates });
 

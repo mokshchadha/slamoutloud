@@ -1,16 +1,18 @@
+import dynamic from "next/dynamic";
 import Hero from "./components/homepage/Hero";
-import VisionMission from "./components/homepage/VisionMission";
-import WeareSOL from "./components/homepage/WeareSOL";
 import DidYouKnow from "./components/homepage/DidYouKnow";
-import OurImpact from "./components/homepage/OurImpact";
-import ChildrensHighlight from "./components/homepage/ChildrensHighlight";
-import Programmes from "./components/homepage/Programmes";
-import FAQs from "./components/homepage/FAQs";
-import DonateAndJoin from "./components/homepage/DonateAndJoin";
-import PartnersAndFeature from "./components/homepage/PartnersAndFeature";
-import Media from "./components/homepage/Media";
-import Newsletter from "./components/homepage/Newsletter";
-import Footer from "./components/Footer";
+
+const WeareSOL = dynamic(() => import("./components/homepage/WeareSOL"));
+const VisionMission = dynamic(() => import("./components/homepage/VisionMission"));
+const FAQs = dynamic(() => import("./components/homepage/FAQs"));
+const OurImpact = dynamic(() => import("./components/homepage/OurImpact"));
+const ChildrensHighlight = dynamic(() => import("./components/homepage/ChildrensHighlight"));
+const Programmes = dynamic(() => import("./components/homepage/Programmes"));
+const PartnersAndFeature = dynamic(() => import("./components/homepage/PartnersAndFeature"));
+const DonateAndJoin = dynamic(() => import("./components/homepage/DonateAndJoin"));
+const Media = dynamic(() => import("./components/homepage/Media"));
+const Newsletter = dynamic(() => import("./components/homepage/Newsletter"));
+const Footer = dynamic(() => import("./components/Footer"));
 
 export default function Home() {
   return (

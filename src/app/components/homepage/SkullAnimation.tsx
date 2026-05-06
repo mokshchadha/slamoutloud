@@ -157,11 +157,6 @@ export default function SkullAnimation({
 
   return (
     <div className="relative w-full h-full flex items-center justify-center pointer-events-none">
-      <link
-        href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&display=swap"
-        rel="stylesheet"
-      />
-
       <svg
         viewBox="-80 -25 420 380"
         className="w-full h-full max-w-full"
@@ -226,7 +221,7 @@ export default function SkullAnimation({
                 textAnchor={anchor}
                 fill={color}
                 fontSize={18}
-                fontFamily="'Caveat', cursive"
+                fontFamily="var(--font-caveat), cursive"
                 fontWeight={600}
                 style={{
                   opacity: revealed ? opacity : 0,
