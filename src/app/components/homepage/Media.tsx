@@ -7,38 +7,38 @@ import Link from "next/link";
 const mediaData = [
   {
     id: 1,
-    title: "The Possibilities of Art in Socio-Emotional Learning",
-    image: "/media/media1.png",
-    link: "https://medium.com/social-emotional-learning/the-possibilities-of-art-in-socio-emotional-learning-curating-young-learners-well-being-2d17c7a985f2",
-    content: "In 2019, Muskan, a young poet involved with Slam Out Loud (SOL) while performing at the TEDxGatewaySalon Platform shared how she was often told by her parents and teachers that \"the Arts are for people who are not hardworking.\"",
-  },
-  {
-    id: 2,
-    title: "What Happens when Children Engage with Art?",
-    image: "/media/media2.png",
-    link: "https://www.wise-qatar.org/what-happens-when-children-engage-with-art/",
-    content: "5 years ago, while facilitating a poetry workshop, I met Supriya Kumari, a 16-year-old student poet who is now an active member of Slam Out Loud's 'Bol Poetry Crew.' Not only was she frugal with her words and cautious of everyone around her, she lacked confidence...",
-  },
-  {
-    id: 3,
     title: "How Slam Out Loud is transforming arts-in-education in India and beyond",
     image: "/media/media3.png",
     link: "https://hundred.org/en/articles/how-slam-out-loud-is-transforming-arts-in-education-in-india-and-beyond",
     content: "Slam Out Loud (SOL) is a non-profit organisation based in India that uses the transformative power of performance and visual arts to help build Creative Confidence (life) skills in children from disadvantaged communities. So far they have reached 4.7 million children through their low-tech arts programme...",
   },
   {
-    id: 4,
+    id: 2,
     title: "India: Arts for All — Slam Out Loud",
-    image: "/media/media4.png", // Reusing/using media4 for this major institution
+    image: "/media/media4.png",
     link: "https://documents1.worldbank.org/curated/en/482071606815115912/pdf/India-Arts-for-All-Slam-Out-Loud.pdf",
     content: "A comprehensive case study by the World Bank detailing Slam Out Loud's 'Arts for All' initiative, exploring its impact and the possibilities of scaling art-based socio-emotional learning across the country.",
   },
   {
+    id: 3,
+    title: "What Happens when Children Engage with Art?",
+    image: "/media/media2.png",
+    link: "https://www.wise-qatar.org/what-happens-when-children-engage-with-art/",
+    content: "5 years ago, while facilitating a poetry workshop, I met Supriya Kumari, a 16-year-old student poet who is now an active member of Slam Out Loud's 'Bol Poetry Crew.' Not only was she frugal with her words and cautious of everyone around her, she lacked confidence...",
+  },
+  {
+    id: 4,
+    title: "The Possibilities of Art in Socio-Emotional Learning",
+    image: "/media/media1.png",
+    link: "https://medium.com/social-emotional-learning/the-possibilities-of-art-in-socio-emotional-learning-curating-young-learners-well-being-2d17c7a985f2",
+    content: "An exploration of how art-based socio-emotional learning can curate and support the well-being of young learners, offering them a space for creative expression and emotional growth.",
+  },
+  {
     id: 5,
-    title: "Programmatic approaches to the gender-related impacts of COVID-19 on education",
-    image: "/media/media4.png", // Using same or similar if no 5th image
+    title: "Case study: Slam Out Loud - Arts for All | UNGEI",
+    image: "/media/media4.png",
     link: "https://www.ungei.org/publication/case-study-slam-out-loud-arts-all",
-    content: "This case study explores the Slam Out Loud - Arts for All programme response to the gender-related impacts of COVID-19 on education, programme outcomes, challenges and learning, and opportunities beyond the immediate crisis to leverage art and low-tech mediums.",
+    content: "Slam Out Loud (SOL) uses the transformative power of performance and visual arts to help build creative confidence and skills like communication, critical thinking and empathy in children from disadvantaged communities. This case study looks at the Arts for All programme response to the gender-related impacts of COVID-19 on education.",
   }
 ];
 

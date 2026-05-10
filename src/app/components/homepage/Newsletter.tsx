@@ -75,14 +75,14 @@ const Newsletter = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="your@email"
-                  className="flex-grow py-4 px-6 text-lg outline-none text-black placeholder:text-gray-400"
+                  className="flex-grow min-w-0 py-4 px-4 md:px-6 text-lg outline-none text-black placeholder:text-gray-400"
                   required
                   disabled={status === "loading"}
                 />
                 <button
                   type="submit"
                   disabled={status === "loading"}
-                  className="bg-[#FF7B7B] text-black px-8 md:px-12 py-4 text-xl font-bold border-l-2 border-black hover:bg-[#ff6b6b] transition-colors active:translate-y-0.5 disabled:opacity-50"
+                  className="shrink-0 bg-[#FF7B7B] text-black px-6 md:px-12 py-4 text-xl font-bold border-l-2 border-black hover:bg-[#ff6b6b] transition-colors active:translate-y-0.5 disabled:opacity-50"
                 >
                   {status === "loading" ? "Submitting..." : "Submit"}
                 </button>

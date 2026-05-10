@@ -27,7 +27,8 @@ export default function WeareSOL() {
           transition={{ ...fadeInUp.transition, delay: 0.1 }}
           className="text-5xl sm:text-6xl md:text-[90px] font-bold text-[#f56f7b] mt-4 md:mt-6 leading-none tracking-tight"
         >
-          Slam Out Loud
+          <span className="hidden md:inline">Slam Out Loud</span>
+          <span className="inline md:hidden">S.O.L</span>
         </motion.h1>
         
         <motion.div 
