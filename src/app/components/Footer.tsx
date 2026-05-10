@@ -3,22 +3,22 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-[#ff7b7b] pt-24 pb-16 px-6 md:px-12 flex justify-center">
-      <div className="max-w-[1400px] w-full flex flex-col gap-16 text-black">
+    <footer className="w-full bg-[#ff7b7b] pt-16 pb-12 md:pt-24 md:pb-16 px-6 md:px-12 flex justify-center">
+      <div className="max-w-[1400px] w-full flex flex-col gap-10 md:gap-16 text-black">
         {/* Top Section: Heading and Subheading */}
-        <div className="flex flex-col gap-6">
-          <h2 className="text-[80px] leading-[0.9] md:text-[140px] lg:text-[180px] font-bold tracking-tight">
+        <div className="flex flex-col gap-4 md:gap-6">
+          <h2 className="text-6xl sm:text-[80px] leading-[0.95] md:leading-[0.9] md:text-[140px] lg:text-[180px] font-bold tracking-tight break-words">
             Slam Out Loud.
           </h2>
-          <p className="text-2xl md:text-4xl lg:text-[40px] font-medium text-black/70 leading-snug">
+          <p className="text-xl sm:text-2xl md:text-4xl lg:text-[40px] font-medium text-black/70 leading-snug">
             “Every child will have a voice that enables them to change lives.”
           </p>
         </div>
 
         {/* Bottom Section: Columns */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mt-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 md:gap-12 mt-4 md:mt-8">
           {/* Column 1: Info and Socials */}
-          <div className="flex flex-col gap-8 md:col-span-1 pr-4">
+          <div className="flex flex-col gap-6 md:gap-8 md:col-span-1 md:pr-4">
             <div className="text-black/70 text-base md:text-lg font-medium leading-relaxed">
               <p>FOUNDATION OF ARTS FOR SOCIAL CHANGE IN INDIA</p>
               <p>Innov8 CP2, 44, Backary Portion, 2nd Floor, Regal Building,</p>
