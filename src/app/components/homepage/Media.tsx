@@ -8,35 +8,35 @@ const mediaData = [
   {
     id: 1,
     title: "How Slam Out Loud is transforming arts-in-education in India and beyond",
-    image: "/media/media3.png",
+    image: "/media/media1.png",
     link: "https://hundred.org/en/articles/how-slam-out-loud-is-transforming-arts-in-education-in-india-and-beyond",
     content: "Slam Out Loud (SOL) is a non-profit organisation based in India that uses the transformative power of performance and visual arts to help build Creative Confidence (life) skills in children from disadvantaged communities. So far they have reached 4.7 million children through their low-tech arts programme...",
   },
   {
     id: 2,
     title: "India: Arts for All — Slam Out Loud",
-    image: "/media/media4.png",
+    image: "/media/media2.png",
     link: "https://documents1.worldbank.org/curated/en/482071606815115912/pdf/India-Arts-for-All-Slam-Out-Loud.pdf",
     content: "A comprehensive case study by the World Bank detailing Slam Out Loud's 'Arts for All' initiative, exploring its impact and the possibilities of scaling art-based socio-emotional learning across the country.",
   },
   {
     id: 3,
     title: "What Happens when Children Engage with Art?",
-    image: "/media/media2.png",
+    image: "/media/media3.png",
     link: "https://www.wise-qatar.org/what-happens-when-children-engage-with-art/",
     content: "5 years ago, while facilitating a poetry workshop, I met Supriya Kumari, a 16-year-old student poet who is now an active member of Slam Out Loud's 'Bol Poetry Crew.' Not only was she frugal with her words and cautious of everyone around her, she lacked confidence...",
   },
   {
     id: 4,
     title: "The Possibilities of Art in Socio-Emotional Learning",
-    image: "/media/media1.png",
+    image: "/media/media4.png",
     link: "https://medium.com/social-emotional-learning/the-possibilities-of-art-in-socio-emotional-learning-curating-young-learners-well-being-2d17c7a985f2",
     content: "An exploration of how art-based socio-emotional learning can curate and support the well-being of young learners, offering them a space for creative expression and emotional growth.",
   },
   {
     id: 5,
     title: "Case study: Slam Out Loud - Arts for All | UNGEI",
-    image: "/media/media4.png",
+    image: "/media/media5.png",
     link: "https://www.ungei.org/publication/case-study-slam-out-loud-arts-all",
     content: "Slam Out Loud (SOL) uses the transformative power of performance and visual arts to help build creative confidence and skills like communication, critical thinking and empathy in children from disadvantaged communities. This case study looks at the Arts for All programme response to the gender-related impacts of COVID-19 on education.",
   }
@@ -102,7 +102,7 @@ export default function Media() {
                     <div className="w-full flex flex-col lg:flex-row gap-6 lg:gap-12 items-start lg:items-center justify-between">
                       {/* Left Content (Image) */}
                       <div className="w-full lg:w-1/2 flex justify-start">
-                        <div className="relative w-full max-w-[500px] aspect-[4/3] overflow-hidden rounded-sm">
+                        <div className="relative w-full max-w-[300px] aspect-[4/3] overflow-hidden rounded-sm">
                           <Image
                             src={item.image}
                             alt={item.title}
