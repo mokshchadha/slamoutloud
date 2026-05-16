@@ -19,8 +19,8 @@ export default function Programmes() {
           
           {/* Card 1: Art For All */}
           <motion.div 
-            initial={{ opacity: 0, x: -100, rotate: -2 }}
-            whileInView={{ opacity: 1, x: 0, rotate: -2 }}
+            initial={{ opacity: 0, x: -100, rotate: 3 }}
+            whileInView={{ opacity: 1, x: 0, rotate: 3 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="relative w-full max-w-[420px] bg-[#4ba39c] p-8 md:p-10 shadow-sm top-0 lg:top-4 z-20 flex-1 lg:max-h-[460px]"
@@ -52,11 +52,11 @@ export default function Programmes() {
 
           {/* Card 2: Jijivisha Fellowship */}
           <motion.div 
-            initial={{ opacity: 0, x: 100, rotate: 3 }}
-            whileInView={{ opacity: 1, x: 0, rotate: 3 }}
+            initial={{ opacity: 0, x: 100, rotate: -3 }}
+            whileInView={{ opacity: 1, x: 0, rotate: -3 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
-            className="relative w-full max-w-[420px] bg-[#fcb060] p-8 md:p-10 shadow-sm z-10 flex-1 lg:mt-12 lg:-ml-8 lg:max-h-[460px]"
+            className="relative w-full max-w-[420px] bg-[#fcb060] p-8 md:p-10 shadow-sm z-10 flex-1 lg:mt-12 lg:ml-4 lg:max-h-[460px]"
           >
             {/* Sun Illustration */}
             <div className="absolute -top-24 md:-top-[160px] lg:-top-[200px] -right-16 md:-right-[180px] lg:-right-[220px] w-56 md:w-[320px] lg:w-[400px] aspect-[4/3] z-30 pointer-events-none">
