@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 const statesData = [
   {
@@ -29,7 +32,13 @@ const Diksha = () => {
       <div className="w-full max-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16 items-start">
           {/* Column 1: Title & Image (Takes 2/5 columns) */}
-          <div className="lg:col-span-2 flex flex-col gap-10">
+          <motion.div 
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="lg:col-span-2 flex flex-col gap-10"
+          >
             <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-black leading-tight">
               Digital Reach via Diksha
             </h2>
@@ -42,12 +51,19 @@ const Diksha = () => {
                 className="w-full h-auto object-cover"
               />
             </div>
-          </div>
+          </motion.div>
 
           {/* Column 2: States Grid (Takes 3/5 columns) */}
           <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16 lg:pt-2">
             {statesData.map((state, index) => (
-              <div key={index} className="flex flex-col">
+              <motion.div 
+                key={index} 
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="flex flex-col"
+              >
                 <h3 className="text-lg md:text-xl font-bold text-black mb-6">{state.name}</h3>
                 <div className="flex flex-col gap-3 text-base md:text-lg text-gray-800">
                   <p className="leading-relaxed">
@@ -57,7 +73,7 @@ const Diksha = () => {
                     <span className="font-semibold">Reach:</span> {state.reach}
                   </p>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>

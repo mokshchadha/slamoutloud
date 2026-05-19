@@ -2,14 +2,21 @@
 
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function TJF() {
   return (
-    <section className="bg-[#FAF7F2] py-8 md:py-16 px-6 md:px-12 lg:px-24">
+    <section className="bg-[#FAF7F2] py-8 md:py-16 px-6 md:px-12 lg:px-24 overflow-hidden">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-8 md:gap-16">
         
         {/* Left Content Side */}
-        <div className="w-full md:w-[55%] flex flex-col gap-8 order-1">
+        <motion.div 
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.8 }}
+          className="w-full md:w-[55%] flex flex-col gap-8 order-1"
+        >
           <h2 className="text-3xl md:text-4xl lg:text-[42px] leading-[1.2] tracking-tight font-medium text-[#1A1A1A]">
             TJF gives children structured tools to notice{" "}
             <span className="font-extrabold italic">
@@ -53,10 +60,16 @@ export default function TJF() {
               </div>
             </a>
           </div>
-        </div>
+        </motion.div>
 
         {/* Right Image Side */}
-        <div className="w-full md:w-[45%] flex justify-center items-center order-2">
+        <motion.div 
+          initial={{ opacity: 0, x: 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.8 }}
+          className="w-full md:w-[45%] flex justify-center items-center order-2"
+        >
           <div className="relative w-full aspect-[4/3] md:aspect-[5/6] lg:aspect-[4/4] overflow-hidden rounded-lg shadow-sm">
             <Image
               src="/jijivisha/tjf.png"
@@ -66,7 +79,7 @@ export default function TJF() {
               sizes="(max-width: 768px) 100vw, 45vw"
             />
           </div>
-        </div>
+        </motion.div>
 
       </div>
     </section>

@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 export default function CAP() {
   return (
@@ -9,7 +10,13 @@ export default function CAP() {
         <div className="flex flex-col lg:flex-row items-stretch">
           
           {/* Peach Box - Community Art Projects (CAPs) */}
-          <div className="w-full lg:w-[45%] bg-[#F9C784] p-8 md:p-12 lg:p-16 relative z-10 flex flex-col justify-center">
+          <motion.div 
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.8 }}
+            className="w-full lg:w-[45%] bg-[#F9C784] p-8 md:p-12 lg:p-16 relative z-10 flex flex-col justify-center"
+          >
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#1A1A1A] leading-tight mb-4">
               Community Art Projects (CAPs)
             </h2>
@@ -30,18 +37,30 @@ export default function CAP() {
             </div>
 
             {/* Pretzel Image */}
-            <div className="absolute -bottom-12 -left-12 w-48 h-48 pointer-events-none hidden lg:block">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.8, rotate: -20 }}
+              whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="absolute -bottom-12 -left-12 w-48 h-48 pointer-events-none hidden lg:block"
+            >
               <Image
                 src="/jijivisha/pretzel.png"
                 alt="Decorative pretzel"
                 fill
                 className="object-contain"
               />
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* Teal Box - Impact */}
-          <div className="w-full lg:w-[55%] bg-[#4E9F8F] p-8 md:p-12 lg:p-16 relative lg:mt-12 lg:ml-[-2rem] z-20 flex flex-col">
+          <motion.div 
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.8 }}
+            className="w-full lg:w-[55%] bg-[#4E9F8F] p-8 md:p-12 lg:p-16 relative lg:mt-12 lg:ml-[-2rem] z-20 flex flex-col"
+          >
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-12">
               Impact
             </h2>
@@ -88,15 +107,21 @@ export default function CAP() {
             </div>
 
             {/* Star Image */}
-            <div className="absolute -top-16 -right-16 md:-top-24 md:-right-24 w-64 h-64 md:w-80 md:h-80 pointer-events-none hidden lg:block">
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.8, rotate: 20 }}
+              whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="absolute -top-16 -right-16 md:-top-24 md:-right-24 w-64 h-64 md:w-80 md:h-80 pointer-events-none hidden lg:block"
+            >
               <Image
                 src="/jijivisha/star.png"
                 alt="Decorative star character"
                 fill
                 className="object-contain"
               />
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
         </div>
       </div>
